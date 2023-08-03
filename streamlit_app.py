@@ -39,76 +39,81 @@
     #     .mark_circle(color='#0068c9', opacity=0.5)
     #     .encode(x='x:Q', y='y:Q'))
 import streamlit as st
-
-vegetable_data = {
-    "Tinda": {
-        "Ideal Temp. C": 25,
-        "Range Temp C": "20-30",
-        "Growing_way": "Direct",
-        "North India": "Feb-Mar/Jun-Jul",
-        "South India": "Feb-Mar/Jun-Jul"
-    },
-    "Beet": {
-        "Ideal Temp. C": 20,
-        "Range Temp C": "10-30",
-        "Growing_way": "Direct",
-        "North India": "Oct-Nov",
-        "South India": "Aug-Nov"
-    },
-    "Bittergourd": {
-        "Ideal Temp. C": 25,
-        "Range Temp C": "20-30",
-        "Growing_way": "Direct",
-        "North India": "Feb-March/June-July",
-        "South India": "Nov-Dec/Dec-JanJun-July"
-    },
-    "Tomato":{
-        "Ideal Temp. C": 25,
-        "Range Temp C": "20-30",
-        "Growing_way": "Direct",
-        "North India": "Feb-March/June-July",
-        "South India": "Nov-Dec/Dec-JanJun-July"
-    },
-    "Potato":{
-        "Ideal Temp. C": 25,
-        "Range Temp C": "20-30",
-        "Growing_way": "Direct",
-        "North India": "Feb-March/June-July",
-        "South India": "Nov-Dec/Dec-JanJun-July"
-    },
-    "Brinjal":{
-        "Ideal Temp. C": 25,
-        "Range Temp C": "20-30",
-        "Growing_way": "Direct",
-        "North India": "Feb-March/June-July",
-        "South India": "Nov-Dec/Dec-JanJun-July"
+tab1, tab2, tab3 = st.tabs(["Disease Identification", "Crop prediction", "Terrace farmin advisory"])
+with tab1:
+    st.header("Disease Identification")
+with tab2:
+    st.header("Crop prediction") 
+with tab3:
+    vegetable_data = {
+        "Tinda": {
+            "Ideal Temp. C": 25,
+            "Range Temp C": "20-30",
+            "Growing_way": "Direct",
+            "North India": "Feb-Mar/Jun-Jul",
+            "South India": "Feb-Mar/Jun-Jul"
+        },
+        "Beet": {
+            "Ideal Temp. C": 20,
+            "Range Temp C": "10-30",
+            "Growing_way": "Direct",
+            "North India": "Oct-Nov",
+            "South India": "Aug-Nov"
+        },
+        "Bittergourd": {
+            "Ideal Temp. C": 25,
+            "Range Temp C": "20-30",
+            "Growing_way": "Direct",
+            "North India": "Feb-March/June-July",
+            "South India": "Nov-Dec/Dec-JanJun-July"
+        },
+        "Tomato":{
+            "Ideal Temp. C": 25,
+            "Range Temp C": "20-30",
+            "Growing_way": "Direct",
+            "North India": "Feb-March/June-July",
+            "South India": "Nov-Dec/Dec-JanJun-July"
+        },
+        "Potato":{
+            "Ideal Temp. C": 25,
+            "Range Temp C": "20-30",
+            "Growing_way": "Direct",
+            "North India": "Feb-March/June-July",
+            "South India": "Nov-Dec/Dec-JanJun-July"
+        },
+        "Brinjal":{
+            "Ideal Temp. C": 25,
+            "Range Temp C": "20-30",
+            "Growing_way": "Direct",
+            "North India": "Feb-March/June-July",
+            "South India": "Nov-Dec/Dec-JanJun-July"
+        }
+        # Add more vegetables here...
     }
-    # Add more vegetables here...
-}
-
-def display_characteristics(vegetable_name):
-    if vegetable_name in vegetable_data:
-        return vegetable_data[vegetable_name]
-    else:
-        return None
-
-# Streamlit app
-def main():
-    st.title("Vegetable Characteristics Viewer")
-
-    st.write("Select a vegetable to view its characteristics:")
-
-    # User input for vegetable selection
-    selected_vegetable = st.selectbox("Select a vegetable", list(vegetable_data.keys()))
-
-    if st.button("Display Characteristics"):
-        characteristics = display_characteristics(selected_vegetable)
-        if characteristics:
-            st.write(f"Characteristics of {selected_vegetable}:")
-            for key, value in characteristics.items():
-                st.write(f"{key}: {value}")
+    
+    def display_characteristics(vegetable_name):
+        if vegetable_name in vegetable_data:
+            return vegetable_data[vegetable_name]
         else:
-            st.error(f"{selected_vegetable} not found in the database.")
-
-if __name__ == "__main__":
-    main()
+            return None
+    
+    # Streamlit app
+    def main():
+        st.title("Vegetable Characteristics Viewer")
+    
+        st.write("Select a vegetable to view its characteristics:")
+    
+        # User input for vegetable selection
+        selected_vegetable = st.selectbox("Select a vegetable", list(vegetable_data.keys()))
+    
+        if st.button("Display Characteristics"):
+            characteristics = display_characteristics(selected_vegetable)
+            if characteristics:
+                st.write(f"Characteristics of {selected_vegetable}:")
+                for key, value in characteristics.items():
+                    st.write(f"{key}: {value}")
+            else:
+                st.error(f"{selected_vegetable} not found in the database.")
+    
+    if __name__ == "__main__":
+        main()
